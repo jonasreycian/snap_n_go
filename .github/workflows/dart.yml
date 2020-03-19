@@ -23,5 +23,5 @@ jobs:
           channel: 'stable'
         name: Installing dependencies
       - run: flutter pub get
-      - run: flutter test
+      #- run: flutter test
       - run: flutter build apk
