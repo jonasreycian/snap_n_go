@@ -30,6 +30,9 @@ dependencies:
   # Image Picker
   image_picker: ^0.6.3+4
 
+  # Path provider
+  path_provider: ^1.6.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
