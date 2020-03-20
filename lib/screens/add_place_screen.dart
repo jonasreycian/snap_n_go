@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_go/providers/great_places.dart';
 
 import 'package:snap_n_go/widgets/image_input.dart';
+import 'package:snap_n_go/widgets/location_input.dart';
 
 
 class AddPlaceScreen extends StatefulWidget {
@@ -54,6 +55,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
+                    SizedBox(height: 10,),
+                    LocationInput(),
                   ],
                 ),
               ),
