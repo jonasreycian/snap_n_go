@@ -1,4 +1,9 @@
+name: Dart CI
+
 on:
+  pull_request:
+    branches: 
+      - feature/*
   push:
     branches: 
       - master
@@ -23,5 +28,5 @@ jobs:
           channel: 'stable'
         name: Installing dependencies
       - run: flutter pub get
-      - run: flutter test
+      #- run: flutter test
       - run: flutter build apk
