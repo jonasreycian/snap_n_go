@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:snap_n_go/helpers/location_helper.dart';
 
 class LocationInput extends StatefulWidget {
   @override
@@ -10,10 +11,37 @@ class _LocationInputState extends State<LocationInput> {
   String _previeImageUrl;
 
   Future<void> _getCurrentUserLocation() async {
-    final locationData = await Location().getLocation();
+    Location location = new Location();
 
-    print(locationData.latitude);
-    print(locationData.longitude);
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.DENIED) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.GRANTED) {
+        return;
+      }
+    }
+
+    _locationData = await Location().getLocation();
+
+    final staticMapImageUrl = LocationHelper.generateLocationPreviewImage(
+      locationData: _locationData,
+    );
+
+    setState(() {
+      _previeImageUrl = staticMapImageUrl;
+    });
   }
 
   @override
